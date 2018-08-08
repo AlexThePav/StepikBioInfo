@@ -7,7 +7,7 @@ def debruijn(k, text):
     kmer_list = composition(k-1, text)
     nodes = overlap_graph(kmer_list)
 
-
+    print("OH hi Git!")
 
     return nodes
 
