@@ -26,18 +26,28 @@ from OverlapGraph import overlap_graph
 def pathGraph(k, text):
     kmer_list = composition(k, text)
     print(text)
-    edges = overlap_graph(kmer_list)
-
-    for edge in edges:
-        print("{} -> {}".format(edge, ",".join(edges[edge][:])))
+    print(kmer_list)
+    # edges = overlap_graph(kmer_list)
+    #
+    # for edge in edges:
+    #     print("{} -> {}".format(edge, ",".join(edges[edge][:])))
+    #
+    # print("=" * 40)
 
     nodes = {}
 
     for kmer in kmer_list:
         kmer_prefix = kmer[0:k-1]
-        kmer_suffix = kmer[-k+1:]
+        # kmer_suffix = kmer[-k+1:]
+        nodes[kmer_prefix] = []
 
-        print("{} becomes {} -> {}".format(kmer, kmer_prefix, kmer_suffix))
+        # print("{} becomes {} -> {}".format(kmer, kmer_prefix, kmer_suffix))
+
+        for candidate in kmer_list:
+            candidate_prefix = candidate[0:k-1]
+            if kmer_prefix == candidate_prefix:
+                nodes[kmer_prefix]\
+                    .append(candidate[-k+1:])
 
 
     # edge_count = 0
@@ -72,7 +82,7 @@ def pathGraph(k, text):
 
 
 
-    print("=" * 40)
+    # print("=" * 40)
 
     sorted_nodes = sorted(nodes)
 
@@ -80,10 +90,10 @@ def pathGraph(k, text):
         print("{} -> {}".format(node, ",".join(nodes[node][:])))
 
 
-    return edges
+    return nodes
 
 
-path_graph = pathGraph(3, "CTCTA")
+path_graph = pathGraph(4, "AAGATTCTCTAAGA")
 
 # print("\nTAATGCCATGGGATGTT\n")
 

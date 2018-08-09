@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3a77d87e-2ed2-4846-ae17-3e4088bb7192" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Composition.py" beforeDir="false" afterPath="$PROJECT_DIR$/Composition.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DeBruijn.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeBruijn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OverlapGraph.py" beforeDir="false" afterPath="$PROJECT_DIR$/OverlapGraph.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,12 +21,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="243" />
+          <entry key="py" value="431" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="243" />
+          <entry key="Python" value="431" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -68,8 +64,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DeBruijn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="530">
-              <caret line="39" column="73" selection-start-line="39" selection-start-column="73" selection-end-line="39" selection-end-column="73" />
+            <state relative-caret-position="668">
+              <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
                 <element signature="e#1194#1210#0" />
@@ -93,7 +89,6 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1" />
     <option name="y" value="59" />
     <option name="width" value="1920" />
     <option name="height" value="1021" />
@@ -221,7 +216,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="59" width="1920" height="1021" extended-state="0" />
+    <frame x="0" y="59" width="1920" height="1021" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20500532" />
@@ -277,8 +272,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DeBruijn.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="39" column="73" selection-start-line="39" selection-start-column="73" selection-end-line="39" selection-end-column="73" />
+        <state relative-caret-position="668">
+          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
             <element signature="e#1194#1210#0" />
