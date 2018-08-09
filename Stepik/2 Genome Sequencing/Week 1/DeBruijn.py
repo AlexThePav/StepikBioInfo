@@ -4,6 +4,24 @@ from OverlapGraph import overlap_graph
 # Input: An integer k and a string Text.
 # Output: DeBruijnk(Text), in the form of an adjacency list.
 
+### Hints ###
+# The two instances of "AGA" in the sample output does not simply mean that
+# "AGA" appears twice: it means that "AGA" appears twice directly after "AAG"
+# (i.e., there are two instances of "AAGA"). Regarding AAG, it only appears
+# once as a k-mer suffix (TAAG), meaning it should only appear on the right
+# side once: to the right of TAA. Regarding TCT, it appears as a suffix
+# twice: TTCT and CTCT, so it shows up once to the right of TTC and once
+# to the right of CTC
+
+# Basically, for every k-mer in Text, we're creating an edge
+# "Prefix(k-mer) -> Suffix(k-mer)".
+# For example, if the string is CTCTA and k = 3, then:
+# CTCTA: CTC becomes CT -> TC
+# CTCTA: TCT becomes TC -> CT
+# CTCTA﻿: CTA becomes CT -> TA
+# The final output would be:
+# CT -> TC,TA
+# TC -> CT
 
 def pathGraph(k, text):
     kmer_list = composition(k, text)
