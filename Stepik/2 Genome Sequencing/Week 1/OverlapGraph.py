@@ -13,8 +13,8 @@ def overlap_graph(kmer_list):
             if kmer_suffix == candidate_prefix:
                 adjacents[kmer].append(candidate)
 
-        if len(adjacents[kmer]) == 0:
-            del(adjacents[kmer])
+        # if len(adjacents[kmer]) == 0:
+        #     del(adjacents[kmer])
 
     return adjacents
 
