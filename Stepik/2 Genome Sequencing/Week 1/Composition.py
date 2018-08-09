@@ -4,7 +4,7 @@ def composition(k, text):
     kmer_list = []
     t = len(text)
 
-    for i in range(0, t-k+1):
+    for i in range(0, t-k):
         kmer_list.append(text[i:i+k])
 
     return kmer_list
