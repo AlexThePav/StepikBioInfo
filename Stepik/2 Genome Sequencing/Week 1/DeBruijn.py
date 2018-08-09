@@ -1,5 +1,5 @@
 from Composition import composition
-from Overlap_graph import overlapGraph
+from OverlapGraph import overlap_graph
 
 # Input: An integer k and a string Text.
 # Output: DeBruijnk(Text), in the form of an adjacency list.
@@ -8,7 +8,7 @@ from Overlap_graph import overlapGraph
 def pathGraph(k, text):
     kmer_list = composition(k, text)
     print(text)
-    edges = overlapGraph(kmer_list)
+    edges = overlap_graph(kmer_list)
 
     for edge in edges:
         print("{} -> {}".format(edge, ",".join(edges[edge][:])))

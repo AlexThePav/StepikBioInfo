@@ -19,26 +19,26 @@ def overlap_graph(kmer_list):
     return adjacents
 
 
-###INPUT###
-file_input = open("input.txt", "r+")
-kmers = [line.strip('\n') for line in file_input]
-file_input.close()
-
-print("Loading...")
-graph = overlap_graph(kmers)
-
-
-###OUTPUT###
-f = open('output.txt', 'w')
-
-count = 0
-for i in graph:
-    if count < len(graph) - 1:
-        f.write("{} -> {}\n".format(kmers[count], ", ".join(graph[i][:])))
-        count += 1
-    else:
-        f.write("{} -> {}".format(kmers[count], ", ".join(graph[i][:])))
-        count += 1
-f.close()
-
-print("Done! See output.txt")
+# ###INPUT###
+# file_input = open("input.txt", "r+")
+# kmers = [line.strip('\n') for line in file_input]
+# file_input.close()
+#
+# print("Loading...")
+# graph = overlap_graph(kmers)
+#
+#
+# ###OUTPUT###
+# f = open('output.txt', 'w')
+#
+# count = 0
+# for i in graph:
+#     if count < len(graph) - 1:
+#         f.write("{} -> {}\n".format(kmers[count], ", ".join(graph[i][:])))
+#         count += 1
+#     else:
+#         f.write("{} -> {}".format(kmers[count], ", ".join(graph[i][:])))
+#         count += 1
+# f.close()
+#
+# print("Done! See output.txt")
