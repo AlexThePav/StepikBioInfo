@@ -1,47 +1,14 @@
 from Composition import composition
-from OverlapGraph import overlap_graph
 
-# Input: An integer k and a string Text.
-# Output: DeBruijnk(Text), in the form of an adjacency list.
-
-### Hints ###
-# The two instances of "AGA" in the sample output does not simply mean that
-# "AGA" appears twice: it means that "AGA" appears twice directly after "AAG"
-# (i.e., there are two instances of "AAGA"). Regarding AAG, it only appears
-# once as a k-mer suffix (TAAG), meaning it should only appear on the right
-# side once: to the right of TAA. Regarding TCT, it appears as a suffix
-# twice: TTCT and CTCT, so it shows up once to the right of TTC and once
-# to the right of CTC
-
-# Basically, for every k-mer in Text, we're creating an edge
-# "Prefix(k-mer) -> Suffix(k-mer)".
-# For example, if the string is CTCTA and k = 3, then:
-# CTCTA: CTC becomes CT -> TC
-# CTCTA: TCT becomes TC -> CT
-# CTCTA﻿: CTA becomes CT -> TA
-# The final output would be:
-# CT -> TC,TA
-# TC -> CT
 
 def pathGraph(k, text):
     kmer_list = composition(k, text)
-    print(text)
-    print(kmer_list)
-    # edges = overlap_graph(kmer_list)
-    #
-    # for edge in edges:
-    #     print("{} -> {}".format(edge, ",".join(edges[edge][:])))
-    #
-    # print("=" * 40)
 
     nodes = {}
 
     for kmer in kmer_list:
         kmer_prefix = kmer[0:k-1]
-        # kmer_suffix = kmer[-k+1:]
         nodes[kmer_prefix] = []
-
-        # print("{} becomes {} -> {}".format(kmer, kmer_prefix, kmer_suffix))
 
         for candidate in kmer_list:
             candidate_prefix = candidate[0:k-1]
@@ -49,51 +16,31 @@ def pathGraph(k, text):
                 nodes[kmer_prefix]\
                     .append(candidate[-k+1:])
 
-
-    # edge_count = 0
-    # for edge in edges:
-    #     edge_suffix_left = edge[-k+1:]
-    #     edge_prefix_left = edge[0:k-1]
-    #     nodes[edge_prefix_left] = []
-    #     edge_values_list = list(edges.values())
-    #
-    #     for edge_right_list in edge_values_list[edge_count:]:
-    #
-    #         is_right_prefix = False
-    #         is_right_suffix = False
-    #
-    #         for edge_right_kmer in edge_right_list:
-    #             edge_prefix_right = edge_right_kmer[0:k-1]
-    #             edge_suffix_right = edge_right_kmer[-k+1:]
-    #
-    #             if edge_suffix_left == edge_prefix_right:
-    #                 is_right_prefix = True
-    #
-    #             if edge_suffix_left == edge_suffix_right:
-    #                 is_right_suffix = True
-    #
-    #         if is_right_prefix == True and len(nodes[edge_prefix_left]) == 0:
-    #             nodes[edge_prefix_left].append(edge_prefix_right)
-    #
-    #         if is_right_suffix == True:
-    #             nodes[edge_prefix_left].append(edge_suffix_right)
-    #
-    #     edge_count += 1
-
-
-
-    # print("=" * 40)
-
-    sorted_nodes = sorted(nodes)
-
-    for node in sorted_nodes:
-        print("{} -> {}".format(node, ",".join(nodes[node][:])))
-
-
     return nodes
 
+###INPUT###
 
-path_graph = pathGraph(4, "AAGATTCTCTAAGA")
 
-# print("\nTAATGCCATGGGATGTT\n")
+file_input = open("dataset_199_6.txt", "r+")
+numk = int(file_input.readline())
+text = file_input.readlines()[0]
+file_input.close()
 
+path_graph = pathGraph(numk, text)
+
+###OUTPUT###
+
+
+f = open('output.txt', 'w')
+
+count = 1
+for i in path_graph:
+    if count < len(path_graph):
+        f.write("{} -> {}\n".format(i, ", ".join(path_graph[i][:])))
+        count += 1
+    else:
+        f.write("{} -> {}".format(i, ", ".join(path_graph[i][:])))
+        count += 1
+f.close()
+
+print("Done! See output.txt")
