@@ -20,7 +20,6 @@ def pathGraph(k, text):
 
 ###INPUT###
 
-
 file_input = open("dataset_199_6.txt", "r+")
 numk = int(file_input.readline())
 text = file_input.readlines()[0]
@@ -29,7 +28,6 @@ file_input.close()
 path_graph = pathGraph(numk, text)
 
 ###OUTPUT###
-
 
 f = open('output.txt', 'w')
 
