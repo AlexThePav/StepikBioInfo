@@ -34,16 +34,21 @@ path_graph = pathGraph(numk, text)
 
 ###OUTPUT###
 
-f = open('output.txt', 'w')
-
-count = 1
-for i in path_graph:
-    if count < len(path_graph):
-        f.write("{} -> {}\n".format(i, ", ".join(path_graph[i][:])))
-        count += 1
-    else:
-        f.write("{} -> {}".format(i, ", ".join(path_graph[i][:])))
-        count += 1
-f.close()
+with open('output.txt', 'w') as output_file:
+    count = 1
+    for i in path_graph:
+        print("{} -> {}".format(i, ", ".join(path_graph[i][:])), file=output_file)
+#
+# f = open('output.txt', 'w')
+#
+# count = 1
+# for i in path_graph:
+#     if count < len(path_graph):
+#         f.write("{} -> {}\n".format(i, ", ".join(path_graph[i][:])))
+#         count += 1
+#     else:
+#         f.write("{} -> {}".format(i, ", ".join(path_graph[i][:])))
+#         count += 1
+# f.close()
 
 print("Done! See output.txt")
