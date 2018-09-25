@@ -33,7 +33,7 @@ path_graph = pathGraph(numk, text)
 
 ###OUTPUT###
 
-with open('output.txt', 'w') as output_file:
+with open('DeBruijn3TAATGGGATGCCATGTT.txt', 'w') as output_file:
     count = 1
     for i in path_graph:
         print("{} -> {}".format(i, ", ".join(path_graph[i][:])), file=output_file)
@@ -50,4 +50,4 @@ with open('output.txt', 'w') as output_file:
 #         count += 1
 # f.close()
 
-print("Done! See output.txt")
+print("Done! See output file!")

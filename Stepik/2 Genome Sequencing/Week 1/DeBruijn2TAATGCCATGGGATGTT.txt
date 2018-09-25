@@ -1,0 +1,5 @@
+TAATGCCATGGGATGTT
+T -> A, G, G, G, T
+A -> A, T, T, T
+G -> C, G, G, A, T
+C -> C, A

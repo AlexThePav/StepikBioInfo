@@ -1,0 +1,10 @@
+TAATGGGATGCCATGTT
+TA -> AA
+AA -> AT
+AT -> TG, TG, TG
+TG -> GG, GC, GT
+GG -> GG, GA
+GA -> AT
+GC -> CC
+CC -> CA
+CA -> AT
