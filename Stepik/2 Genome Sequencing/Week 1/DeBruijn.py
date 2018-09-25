@@ -13,8 +13,7 @@ def pathGraph(k, text):
         for candidate in kmer_list:
             candidate_prefix = candidate[0:k-1]
             if kmer_prefix == candidate_prefix:
-                nodes[kmer_prefix]\
-                    .append(candidate[-k+1:])
+                nodes[kmer_prefix].append(candidate[-k+1:])
 
     return nodes
 
