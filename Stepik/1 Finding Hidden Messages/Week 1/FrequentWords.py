@@ -13,7 +13,7 @@ def PatternCount(Pattern, Text):
     if Text[i:i+len(Pattern)] == Pattern:
       count = count+1
   return count 
-    
+
 def FrequentWords(Text, k):
   FrequentPatterns = []
   Count = CountDict(Text, k)

@@ -1,36 +1,24 @@
 from Replication import remove_duplicates
 from itertools import product
 
-def allPossibleKMers(k):
-  #way too slow
-  words = []
-  letters = ["A", "C", "G", "T"]
-  for word in product("".join(letters), repeat=k):
-    words.append("".join(list(word)))
-  return words
+def SymbolToNumber(symbol):
+  x = 0
+  if symbol == "C":
+    x = 1
+  elif symbol == "G":
+    x = 2
+  elif symbol == "T":
+    x = 3
+  return x
 
 def PatternToNumber(Pattern):
-  L = len(Pattern)
-  print(len(Pattern))
-  allKmers = allPossibleKMers(L)
-  for kmer in allKmers:
-    print(kmer)
-    if kmer == Pattern:
-      terms = []
-      for letter in kmer:
-        if letter == "A":
-          x = 0
-        elif letter == "C":
-          x = 1
-        elif letter == "G":
-          x = 2
-        elif letter == "T":
-          x = 3
-        y = len(kmer[letter::])
-        terms.append(x*(4**y))
-      index = sum(terms)
-
-  return index
+  l = len(Pattern) - 1
+  if len(Pattern) == 0:
+    return 0
+  patternToList = list(Pattern)
+  symbol = Pattern[l]
+  prefix = Pattern[:l]
+  return 4 * PatternToNumber(prefix) + SymbolToNumber(symbol)
   
 
 
@@ -44,5 +32,4 @@ def FasterFrequentWords(Text, k):
   sortedKmers = sorted(remove_duplicates(allKmers))
   return sortedKmers
 
-print(allPossibleKMers(13))
-print(PatternToNumber("AAGC"))
+print(PatternToNumber("TTTGAAAACTCCGTA"))
