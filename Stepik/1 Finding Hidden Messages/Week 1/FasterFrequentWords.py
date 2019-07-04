@@ -21,15 +21,39 @@ def PatternToNumber(Pattern):
   return 4 * PatternToNumber(prefix) + SymbolToNumber(symbol)
   
 
+def NumberToSymbol(index):
+  symbol = "A"
+  if index == 1:
+    symbol = "C"
+  elif index == 2:
+    symbol = "G"
+  elif index == 3:
+    symbol = "T"
+  return symbol
 
 def NumberToPattern(index, k):
-  pass
+  if k == 1:
+    return NumberToSymbol(index)
+  prefixIndex = index // 4
+  r = index % 4
+  symbol = NumberToSymbol(r)
+  PrefixPattern = NumberToPattern(prefixIndex, k-1)
+  return PrefixPattern + symbol
 
-def FasterFrequentWords(Text, k):
-  allKmers = []
-  for i in range(len(Text)-k+1):
-    allKmers.append(Text[i:i+k])
-  sortedKmers = sorted(remove_duplicates(allKmers))
-  return sortedKmers
+
+def ComputeFrequencies(Text, k):
+  frequencyArray = [0] * (4**k)
+  for i in range(0,len(Text)-k+1):
+    pattern = Text[i:k+i]
+    j = PatternToNumber(pattern)
+    frequencyArray[j] += 1
+  return frequencyArray
+
+frequenciesJoined = ""
+frequencies = ComputeFrequencies("GGCCGCGAAAACCTGTCAAAGGGTAACTCCATCACAGAACCAATGCTAAGTCAACCACAAATTTAGAGACGTCACGAGTATTCGCAGAACACAGGTGCAGTAATCTCATGATACGCAATTAATGAACCTAATATAAAATCATTTGTGCGGGGTACGAGGGCCGCGTAACTAAACAACTGTCCCCCCCCTTAGTTAAGCTCGTTACAAGTCAAGGAATCTAATATAGTTGGACTCCCCCAGGGCGCAAATAACAAAACCCCGGAAAGCGATTCTTCAGGCTACTGGGCCGTCCCTGGTCTAATTAGGGAGCGTAAGAGGCCTGAAGACTATCCTGTGGGATGCTAGGCTTTCGCCTGCGTCTCCCGAACGTGAAGACATTGTATAAGCACCTACCCGCTCCTACAGCAACTTTCACTGCATCCATCTGAGGAGCCTGAAACATCCGGTTCAGGCTATTCGAAAGTTGTTTGTCGTTCTGTTCACTAGAGTTTTGCCCAGCGACATCGTGGGGTGACGCGGCTGAACCAGTCCTTATTAGCTAGCACGTGATGGTGACGACACCTGTAGGGGCAAAGGGGATATCGCTCGGAACACCGGGCTACCCGAAAAGCTTTCTCCGCTGTGGTCTCCCATGACTTCAATGCTAGTCTGAGCGATAATCGTCTATGCTTTCATACGAGCGGGATCCTCAGAGATTTGCAGTCGATAGAAAGGTACCGGGCTCACTCGACTGATATATTAACCGATAGACAT", 5)
+for frequency in frequencies:
+  frequenciesJoined = frequenciesJoined + str(frequency)
+print(" ".join(frequenciesJoined))
 
 print(PatternToNumber("TTTGAAAACTCCGTA"))
+print(NumberToPattern(5437,8))
