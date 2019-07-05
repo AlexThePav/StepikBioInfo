@@ -19,7 +19,6 @@ def PatternToNumber(Pattern):
   symbol = Pattern[l]
   prefix = Pattern[:l]
   return 4 * PatternToNumber(prefix) + SymbolToNumber(symbol)
-  
 
 def NumberToSymbol(index):
   symbol = "A"
@@ -40,20 +39,28 @@ def NumberToPattern(index, k):
   PrefixPattern = NumberToPattern(prefixIndex, k-1)
   return PrefixPattern + symbol
 
-
 def ComputeFrequencies(Text, k):
   frequencyArray = [0] * (4**k)
+  frequenciesJoined = ""
   for i in range(0,len(Text)-k+1):
     pattern = Text[i:k+i]
     j = PatternToNumber(pattern)
     frequencyArray[j] += 1
-  return frequencyArray
+  for frequency in frequencyArray:
+    frequenciesJoined = frequenciesJoined + str(frequency)
+  return "".join(frequenciesJoined)
 
-frequenciesJoined = ""
-frequencies = ComputeFrequencies("GGCCGCGAAAACCTGTCAAAGGGTAACTCCATCACAGAACCAATGCTAAGTCAACCACAAATTTAGAGACGTCACGAGTATTCGCAGAACACAGGTGCAGTAATCTCATGATACGCAATTAATGAACCTAATATAAAATCATTTGTGCGGGGTACGAGGGCCGCGTAACTAAACAACTGTCCCCCCCCTTAGTTAAGCTCGTTACAAGTCAAGGAATCTAATATAGTTGGACTCCCCCAGGGCGCAAATAACAAAACCCCGGAAAGCGATTCTTCAGGCTACTGGGCCGTCCCTGGTCTAATTAGGGAGCGTAAGAGGCCTGAAGACTATCCTGTGGGATGCTAGGCTTTCGCCTGCGTCTCCCGAACGTGAAGACATTGTATAAGCACCTACCCGCTCCTACAGCAACTTTCACTGCATCCATCTGAGGAGCCTGAAACATCCGGTTCAGGCTATTCGAAAGTTGTTTGTCGTTCTGTTCACTAGAGTTTTGCCCAGCGACATCGTGGGGTGACGCGGCTGAACCAGTCCTTATTAGCTAGCACGTGATGGTGACGACACCTGTAGGGGCAAAGGGGATATCGCTCGGAACACCGGGCTACCCGAAAAGCTTTCTCCGCTGTGGTCTCCCATGACTTCAATGCTAGTCTGAGCGATAATCGTCTATGCTTTCATACGAGCGGGATCCTCAGAGATTTGCAGTCGATAGAAAGGTACCGGGCTCACTCGACTGATATATTAACCGATAGACAT", 5)
-for frequency in frequencies:
-  frequenciesJoined = frequenciesJoined + str(frequency)
-print(" ".join(frequenciesJoined))
+def FasterFrequentWords(Text, k):
+  frequentPatterns = []
+  frequencyArray = ComputeFrequencies(Text, k)
+  maxCount = max(frequencyArray)
+  pattern = ""
+  for i in range(0, 4**k-1):
+    if frequencyArray[i] == maxCount:
+      pattern = NumberToPattern(i, k)
+      frequentPatterns.append(pattern)
+  return frequentPatterns
 
-print(PatternToNumber("TTTGAAAACTCCGTA"))
-print(NumberToPattern(5437,8))
+print(" ".join(FasterFrequentWords("ATTTAATTCTAAT", 3)))
+# print(PatternToNumber("TTTGAAAACTCCGTA"))
+# print(NumberToPattern(5437,8))
