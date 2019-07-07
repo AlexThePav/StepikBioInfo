@@ -15,7 +15,6 @@ def PatternToNumber(Pattern):
   l = len(Pattern) - 1
   if len(Pattern) == 0:
     return 0
-  patternToList = list(Pattern)
   symbol = Pattern[l]
   prefix = Pattern[:l]
   return 4 * PatternToNumber(prefix) + SymbolToNumber(symbol)
@@ -48,7 +47,8 @@ def ComputeFrequencies(Text, k):
     frequencyArray[j] += 1
   for frequency in frequencyArray:
     frequenciesJoined = frequenciesJoined + str(frequency)
-  return "".join(frequenciesJoined)
+  # return "".join(frequenciesJoined)
+  return frequencyArray
 
 def FasterFrequentWords(Text, k):
   frequentPatterns = []
@@ -60,7 +60,7 @@ def FasterFrequentWords(Text, k):
       pattern = NumberToPattern(i, k)
       frequentPatterns.append(pattern)
   return frequentPatterns
-
-print(" ".join(FasterFrequentWords("ATTTAATTCTAAT", 3)))
+if __name__ == "__main__":
+  print(" ".join(FasterFrequentWords("ATTTAATTCTAAT", 3)))
 # print(PatternToNumber("TTTGAAAACTCCGTA"))
 # print(NumberToPattern(5437,8))
