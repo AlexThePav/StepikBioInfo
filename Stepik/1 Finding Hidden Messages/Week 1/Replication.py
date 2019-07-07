@@ -1,3 +1,22 @@
+def Skew(Genome):
+    skew = {} #initializing the dictionary
+    newGenome = " " + Genome
+    n = len(newGenome)
+    if newGenome[1] == "C":
+    	skew[0] = -1
+    elif newGenome[1] == "G":
+    	skew[0] = 1
+    else:
+    	skew[0] = 0
+    for i in range(1,n):
+    	if newGenome[i] == "C":
+    		skew[i] = skew[i-1]-1
+    	elif newGenome[i] == "G":
+    		skew[i] = skew[i-1]+1
+    	else:
+    		skew[i] = skew[i-1]
+    return skew
+
 def MinimumSkew(Genome):
   positions = [] # output variable
   skew = Skew(Genome)
@@ -100,5 +119,5 @@ if __name__ == "__main__":
 
   # Call PatternMatching with Pattern equal to "CTTGATCAT" and Genome equal to v_cholerae,
   # and store the output as a variable called positions
-  positions = PatternMatching("CTTGATCAT", v_cholerae)
-  print(positions)
+  # positions = PatternMatching("CTTGATCAT", v_cholerae)
+  # print(positions)
