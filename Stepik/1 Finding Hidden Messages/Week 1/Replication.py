@@ -1,3 +1,5 @@
+# Useful link: https://study.com/academy/lesson/how-okazaki-fragments-of-the-lagging-strand-dna-are-replicated.html
+
 def Skew(Genome):
     skew = {} #initializing the dictionary
     newGenome = " " + Genome
