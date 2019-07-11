@@ -4,12 +4,6 @@ def Skew(Genome):
     skew = {} #initializing the dictionary
     newGenome = Genome + " "
     n = len(newGenome)
-    # if newGenome[1] == "C":
-    # 	skew[0] = -1
-    # elif newGenome[1] == "G":
-    # 	skew[0] = 1
-    # else:
-    # 	skew[0] = 0
     skew[0] = 0
     for i in range(0,n-1):
     	if newGenome[i] == "C":
@@ -86,14 +80,11 @@ def ApproximatePatternMatching(Pattern, Text, d):
   positions = [] # initializing list of positions
   t = len(Text)
   p = len(Pattern)
-  for i in range(t-1):
+  for i in range(t-p):
     comparingText = Text[i:i+p]
-    if len(Pattern) == len(comparingText):
-      hDistance = HammingDistance(Pattern, comparingText)
-      if hDistance <= d:
-        positions.append(i)
-    else:
-      break
+    hDistance = HammingDistance(Pattern, comparingText)
+    if hDistance <= d:
+      positions.append(i)
   return positions
 
 def HammingDistance(p, q):
@@ -113,8 +104,10 @@ if __name__ == "__main__":
   # print(*skew,sep=" ")
 
   # print(HammingDistance("GGGCCGTTGGT", "GGACCGTTGAC"))
-  approxPositions = ApproximatePatternMatching("GAGG", "TTTAGAGCCTTCAGAGG", 2)
-  print(*approxPositions,sep=" ")
+  
+  # approxPositions = ApproximatePatternMatching("GAGG", "TTTAGAGCCTTCAGAGG", 2)
+  # print(*approxPositions,sep=" ")
+
   approxCount = ApproximatePatternCount("CGCCTTT", "CAAATATCTCATAGGTGAACGTAGGACCTAGATTCTGAGTATACATAATGCAGTTCACCCCGTGTAGAATCCCTTGTCGGGGCGATCTGTTTTGGAGCGTGGATGTTTTTGTTAATCTTGTGGATAGAGACCGGCCTTCCGCCTTTGTCGACCTTTACAGCTGCTCTGGGATCGCTCTCTCTGCGGTGACAGCAAAAGCCCCATTCATACCCACGTTAGTTGCATTACCGGTTAGCGAGCAGCGCTCTCATGGCGTCTCGAAACCGACAGGTACCGCACAAGTCTATTGTACCACTCCTTCGTATTGCTTCGCAAACTGTAATAGTGGCGTTAGGCCAAAT", 3)
   print(approxCount)
   # Call PatternMatching with Pattern equal to "CTTGATCAT" and Genome equal to v_cholerae,
