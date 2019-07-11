@@ -79,16 +79,8 @@ def remove_duplicates(Items):
   return ItemsNoDuplicates
 
 def ApproximatePatternCount(Pattern, Text, d):
-  count = 0 # initialize count variable
-  t = len(Text)
-  p = len(Pattern)
-  for i in range(t-1):
-    comparingText = Text[i:i+p]
-    if len(Pattern) == len(comparingText):
-      hDistance = HammingDistance(Pattern, comparingText)
-      if hDistance <= d:
-        count += 1
-  return count
+  positions = ApproximatePatternMatching(Pattern, Text, d)
+  return len(positions)
 
 def ApproximatePatternMatching(Pattern, Text, d):
   positions = [] # initializing list of positions
@@ -106,9 +98,7 @@ def ApproximatePatternMatching(Pattern, Text, d):
 
 def HammingDistance(p, q):
   count = 0
-  j = 0
   for i in range(len(p)):
-    j = i
     if p[i] != q[i]:
       count += 1
   return count
@@ -122,8 +112,11 @@ if __name__ == "__main__":
   # skew = MinimumSkew("TAAAGACTGCCGAGAGGCCAACACGAGTGCTAGAACGAGGGGCGTAAACGCGGGTCCGAT")
   # print(*skew,sep=" ")
 
-  print(HammingDistance("GGGCCGTTGGT", "GGACCGTTGAC"))
-  print(ApproximatePatternMatching("ATTCTGGA", "CGCCCGAATCCAGAACGCATTCCCATATTTCGGGACCACTGGCCTCCACGGTACGGACGTCAATCAAAT", 3))
+  # print(HammingDistance("GGGCCGTTGGT", "GGACCGTTGAC"))
+  approxPositions = ApproximatePatternMatching("GAGG", "TTTAGAGCCTTCAGAGG", 2)
+  print(*approxPositions,sep=" ")
+  approxCount = ApproximatePatternCount("CGCCTTT", "CAAATATCTCATAGGTGAACGTAGGACCTAGATTCTGAGTATACATAATGCAGTTCACCCCGTGTAGAATCCCTTGTCGGGGCGATCTGTTTTGGAGCGTGGATGTTTTTGTTAATCTTGTGGATAGAGACCGGCCTTCCGCCTTTGTCGACCTTTACAGCTGCTCTGGGATCGCTCTCTCTGCGGTGACAGCAAAAGCCCCATTCATACCCACGTTAGTTGCATTACCGGTTAGCGAGCAGCGCTCTCATGGCGTCTCGAAACCGACAGGTACCGCACAAGTCTATTGTACCACTCCTTCGTATTGCTTCGCAAACTGTAATAGTGGCGTTAGGCCAAAT", 3)
+  print(approxCount)
   # Call PatternMatching with Pattern equal to "CTTGATCAT" and Genome equal to v_cholerae,
   # and store the output as a variable called positions
   # positions = PatternMatching("CTTGATCAT", v_cholerae)
