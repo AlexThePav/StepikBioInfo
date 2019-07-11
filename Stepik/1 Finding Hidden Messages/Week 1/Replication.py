@@ -23,10 +23,7 @@ def Skew(Genome):
 def MinimumSkew(Genome):
   positions = [] # output variable
   skew = Skew(Genome)
-  minSkew = 0
-  for i in range(len(skew)):
-    if skew[i] < minSkew:
-      minSkew = skew[i]
+  minSkew = min(skew.values())
   for i in range(len(skew)):
     if skew[i] == minSkew:
       positions.append(i)
@@ -103,15 +100,17 @@ def ApproximatePatternMatching(Pattern, Text, d):
       hDistance = HammingDistance(Pattern, comparingText)
       if hDistance <= d:
         positions.append(i)
+    else:
+      break
   return positions
 
 def HammingDistance(p, q):
   count = 0
   j = 0
   for i in range(len(p)):
-      j = i
-      if p[i] != q[j]:
-          count += 1
+    j = i
+    if p[i] != q[i]:
+      count += 1
   return count
 
 if __name__ == "__main__":
@@ -120,9 +119,11 @@ if __name__ == "__main__":
   # words = FrequentWords("ATCAATGATCAACGTAAGCTTCTAAGCATGATCAAGGTGCTCACACAGTTTATCCACAACCTGAGTGGATGACATCAAGATAGGTCGTTGTATCTCCTTCCTCTCGTACTCTCATGACCACGGAAAGATGATCAAGAGAGGATGATTTCTTGGCCATATCGCAATGAATACTTGTGACTTGTGCTTCCAATTGACATCTTCAGCGCCATATTGCGCTGGCCAAGGTGACGGAGCGGGATTACGAAAGCATGATCATGGCTGTTGTTCTGTTTATCTTGTTTTGACTGAGACTTGTTAGGATAGACGGTTTTTCATCACTGACTAGCCAAAGCCTTACTCTGCCTGACATCGACCGTAAATTGATAATGAATTTACATGCTTCCGCGACGATTTACCTCTTGATCATCGATCCGATTGAAGATCTTCAATTGTTAATTCTCTTGCCTCGACTCATAGCCATGATGAGCTCTTGATCATGTTTCCTTAACCCTCTATTTTTTACGGAAGAATGATCAAGCTGCTGCTCTTGATCATCGTTTC", 10)
   # print(words)
 
-  skew = Skew("GAGCCACCGCGATA").values()
-  print(*skew,sep=" ")
+  # skew = MinimumSkew("TAAAGACTGCCGAGAGGCCAACACGAGTGCTAGAACGAGGGGCGTAAACGCGGGTCCGAT")
+  # print(*skew,sep=" ")
 
+  print(HammingDistance("GGGCCGTTGGT", "GGACCGTTGAC"))
+  print(ApproximatePatternMatching("ATTCTGGA", "CGCCCGAATCCAGAACGCATTCCCATATTTCGGGACCACTGGCCTCCACGGTACGGACGTCAATCAAAT", 3))
   # Call PatternMatching with Pattern equal to "CTTGATCAT" and Genome equal to v_cholerae,
   # and store the output as a variable called positions
   # positions = PatternMatching("CTTGATCAT", v_cholerae)
