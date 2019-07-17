@@ -1,0 +1,32 @@
+from Replication import HammingDistance
+
+def ImmediateNeighbors(Pattern):
+  neighborhood = []
+  for i in range(0,len(Pattern)-1):
+    symbol = Pattern[i]
+    for x in Pattern:
+      if x != symbol:
+        neighbor = Pattern
+        neighborToList = list(neighbor)
+        neighborToList[i] = x
+        neighbor = "".join(neighborToList)
+        neighborhood.append(neighbor)
+  return neighborhood
+
+def Suffix(Pattern):
+  return Pattern[1:]
+
+def Neighbors(Pattern, d):
+  nucleotides = ["A", "C", "G", "T"]
+  if d = 0:
+    return Pattern
+  if len(Pattern) == 1:
+    return nucleotides
+  neighborhood = []
+  suffixNeighbors = Neighbors(Suffix(Pattern), d)
+  for text in suffixNeighbors:
+    if HammingDistance(Suffix(Pattern), text) < d:
+      for x in nucleotides:
+        text += x
+        neighborhood.append(text)
+
