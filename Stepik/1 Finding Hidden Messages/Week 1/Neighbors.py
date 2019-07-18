@@ -21,11 +21,11 @@ def Suffix(Pattern):
 
 def Neighbors(Pattern, d):
   nucleotides = list("ACGT")
+  neighborhood = []
   if d == 0:
     return Pattern
   if len(Pattern) == 1:
     return nucleotides
-  neighborhood = []
   suffixNeighbors = Neighbors(Suffix(Pattern), d)
   print(Pattern, Suffix(Pattern))
   print("suffixNeighbors", suffixNeighbors)
