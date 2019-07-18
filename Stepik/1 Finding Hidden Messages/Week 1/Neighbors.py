@@ -13,12 +13,15 @@ def ImmediateNeighbors(Pattern):
         neighborhood.append(neighbor)
   return neighborhood
 
+def FirstSymbol(Pattern):
+  return Pattern[0]
+
 def Suffix(Pattern):
   return Pattern[1:]
 
 def Neighbors(Pattern, d):
   nucleotides = ["A", "C", "G", "T"]
-  if d = 0:
+  if d == 0:
     return Pattern
   if len(Pattern) == 1:
     return nucleotides
@@ -29,4 +32,9 @@ def Neighbors(Pattern, d):
       for x in nucleotides:
         text += x
         neighborhood.append(text)
+    else:
+      text += FirstSymbol(Pattern)
+      neighborhood.append(text)
+  return neighborhood
 
+print(Neighbors("ACG", 1))
