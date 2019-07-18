@@ -17,16 +17,18 @@ def FirstSymbol(Pattern):
   return Pattern[0]
 
 def Suffix(Pattern):
-  return Pattern[1:]
+  return Pattern[1::]
 
 def Neighbors(Pattern, d):
-  nucleotides = ["A", "C", "G", "T"]
+  nucleotides = list("ACGT")
   if d == 0:
     return Pattern
   if len(Pattern) == 1:
     return nucleotides
   neighborhood = []
   suffixNeighbors = Neighbors(Suffix(Pattern), d)
+  print(Pattern, Suffix(Pattern))
+  print("suffixNeighbors", suffixNeighbors)
   for text in suffixNeighbors:
     if HammingDistance(Suffix(Pattern), text) < d:
       for x in nucleotides:
