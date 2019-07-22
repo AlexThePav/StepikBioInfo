@@ -73,10 +73,10 @@ def remove_duplicates(Items):
   return ItemsNoDuplicates
 
 def ApproximatePatternCount(Pattern, Text, d):
-  positions = ApproximatePatternMatching(Pattern, Text, d)
+  positions = ApproximatePatternPositions(Pattern, Text, d)
   return len(positions)
 
-def ApproximatePatternMatching(Pattern, Text, d):
+def ApproximatePatternPositions(Pattern, Text, d):
   positions = [] # initializing list of positions
   t = len(Text)
   p = len(Pattern)
@@ -85,7 +85,8 @@ def ApproximatePatternMatching(Pattern, Text, d):
     hDistance = HammingDistance(Pattern, comparingText)
     if hDistance <= d:
       positions.append(i)
-  return positions
+  positionsNoDupes = remove_duplicates(positions)
+  return positionsNoDupes
 
 def HammingDistance(p, q):
   count = 0
@@ -93,6 +94,32 @@ def HammingDistance(p, q):
     if p[i] != q[i]:
       count += 1
   return count
+
+def ApproximateCountDict(Text, k, d):
+  counts = {}
+  for i in range(len(Text)-k+1):
+    pattern = Text[i:i+k]
+    counts[i] = ApproximatePatternCount(pattern, Text, d)
+  return counts
+
+def FrequentWordsWithMismatches(Text, k, d):
+  frequentWords = []
+  count = ApproximateCountDict(Text, k, d)
+  print(count)
+  m = max(count.values())
+  print("*" * 10)
+  print(m)
+  print("*" * 10)
+  for key in count.keys():
+    if count[key] == m:
+      print(key)
+  print("*" * 10)
+
+  for i in count:
+    if count[i] == m:
+      frequentWords.append(Text[i:i+k])
+  frequentWordsNoDupes = remove_duplicates(frequentWords)
+  return frequentWordsNoDupes
 
 if __name__ == "__main__":
   # Then, call your FrequentWords function, passing in oriC for Vibrio Cholerae for Text and 10 for k,
@@ -105,11 +132,23 @@ if __name__ == "__main__":
 
   # print(HammingDistance("GGGCCGTTGGT", "GGACCGTTGAC"))
   
-  # approxPositions = ApproximatePatternMatching("GAGG", "TTTAGAGCCTTCAGAGG", 2)
+  # approxPositions = ApproximatePatternPositions("GAGG", "TTTAGAGCCTTCAGAGG", 2)
   # print(*approxPositions,sep=" ")
 
-  approxCount = ApproximatePatternCount("CGCCTTT", "CAAATATCTCATAGGTGAACGTAGGACCTAGATTCTGAGTATACATAATGCAGTTCACCCCGTGTAGAATCCCTTGTCGGGGCGATCTGTTTTGGAGCGTGGATGTTTTTGTTAATCTTGTGGATAGAGACCGGCCTTCCGCCTTTGTCGACCTTTACAGCTGCTCTGGGATCGCTCTCTCTGCGGTGACAGCAAAAGCCCCATTCATACCCACGTTAGTTGCATTACCGGTTAGCGAGCAGCGCTCTCATGGCGTCTCGAAACCGACAGGTACCGCACAAGTCTATTGTACCACTCCTTCGTATTGCTTCGCAAACTGTAATAGTGGCGTTAGGCCAAAT", 3)
-  print(approxCount)
+  # approxCount = ApproximatePatternCount("CGCCTTT", "CAAATATCTCATAGGTGAACGTAGGACCTAGATTCTGAGTATACATAATGCAGTTCACCCCGTGTAGAATCCCTTGTCGGGGCGATCTGTTTTGGAGCGTGGATGTTTTTGTTAATCTTGTGGATAGAGACCGGCCTTCCGCCTTTGTCGACCTTTACAGCTGCTCTGGGATCGCTCTCTCTGCGGTGACAGCAAAAGCCCCATTCATACCCACGTTAGTTGCATTACCGGTTAGCGAGCAGCGCTCTCATGGCGTCTCGAAACCGACAGGTACCGCACAAGTCTATTGTACCACTCCTTCGTATTGCTTCGCAAACTGTAATAGTGGCGTTAGGCCAAAT", 3)
+  # print(approxCount)
+  text = "ACGTTGCATGTCGCATGATGCATGAGAGCT"
+  pattern = "GATG"
+  k = 4
+  d = 2
+  print(" ".join(FrequentWordsWithMismatches(text, k, d)))
+  positions = ApproximatePatternPositions(pattern, text, d)
+  print(positions)
+
+  for pos in positions:
+    print(text[pos:pos+k])
+
+
   # Call PatternMatching with Pattern equal to "CTTGATCAT" and Genome equal to v_cholerae,
   # and store the output as a variable called positions
   # positions = PatternMatching("CTTGATCAT", v_cholerae)
