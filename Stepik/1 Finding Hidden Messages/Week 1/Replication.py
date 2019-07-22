@@ -85,15 +85,15 @@ def ApproximatePatternPositions(Pattern, Text, d):
     hDistance = HammingDistance(Pattern, comparingText)
     if hDistance <= d:
       positions.append(i)
-  positionsNoDupes = remove_duplicates(positions)
-  return positionsNoDupes
+  # positionsNoDupes = remove_duplicates(positions)
+  return positions
 
 def HammingDistance(p, q):
-  count = 0
+  distance = 0
   for i in range(len(p)):
     if p[i] != q[i]:
-      count += 1
-  return count
+      distance += 1
+  return distance
 
 def ApproximateCountDict(Text, k, d):
   counts = {}
@@ -138,9 +138,9 @@ if __name__ == "__main__":
   # approxCount = ApproximatePatternCount("CGCCTTT", "CAAATATCTCATAGGTGAACGTAGGACCTAGATTCTGAGTATACATAATGCAGTTCACCCCGTGTAGAATCCCTTGTCGGGGCGATCTGTTTTGGAGCGTGGATGTTTTTGTTAATCTTGTGGATAGAGACCGGCCTTCCGCCTTTGTCGACCTTTACAGCTGCTCTGGGATCGCTCTCTCTGCGGTGACAGCAAAAGCCCCATTCATACCCACGTTAGTTGCATTACCGGTTAGCGAGCAGCGCTCTCATGGCGTCTCGAAACCGACAGGTACCGCACAAGTCTATTGTACCACTCCTTCGTATTGCTTCGCAAACTGTAATAGTGGCGTTAGGCCAAAT", 3)
   # print(approxCount)
   text = "ACGTTGCATGTCGCATGATGCATGAGAGCT"
-  pattern = "GATG"
+  pattern = "ATGC"
   k = 4
-  d = 2
+  d = 1
   print(" ".join(FrequentWordsWithMismatches(text, k, d)))
   positions = ApproximatePatternPositions(pattern, text, d)
   print(positions)
