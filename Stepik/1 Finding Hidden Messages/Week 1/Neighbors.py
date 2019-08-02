@@ -2,15 +2,17 @@ from Replication import HammingDistance
 
 def ImmediateNeighbors(Pattern):
   neighborhood = []
-  for i in range(0,len(Pattern)-1):
+  nucleotides = list("ACGT")
+  for i in range(0,len(Pattern)):
     symbol = Pattern[i]
-    for x in Pattern:
+    for x in nucleotides:
       if x != symbol:
         neighbor = Pattern
         neighborToList = list(neighbor)
         neighborToList[i] = x
         neighbor = "".join(neighborToList)
         neighborhood.append(neighbor)
+  neighborhood.append(Pattern)
   return neighborhood
 
 def FirstSymbol(Pattern):
@@ -22,21 +24,25 @@ def Suffix(Pattern):
 def Neighbors(Pattern, d):
   nucleotides = list("ACGT")
   if d == 0:
-    return Pattern
+    return [Pattern]
   if len(Pattern) == 1:
     return nucleotides
   neighborhood = []
   suffixNeighbors = Neighbors(Suffix(Pattern), d)
-  print(Pattern, Suffix(Pattern))
-  print("suffixNeighbors", suffixNeighbors)
+  # print(Pattern, Suffix(Pattern))
+  # print("suffixNeighbors", suffixNeighbors)
   for text in suffixNeighbors:
     if HammingDistance(Suffix(Pattern), text) < d:
       for x in nucleotides:
-        text += x
-        neighborhood.append(text)
+        # print(Pattern, text)
+        textWithNucleotide = text
+        x += textWithNucleotide
+        neighborhood.append(x)
     else:
-      text += FirstSymbol(Pattern)
-      neighborhood.append(text)
+      textWithNucleotide = FirstSymbol(Pattern) + text
+      # print("else", Pattern, text)
+      neighborhood.append(textWithNucleotide)
   return neighborhood
 
-print(Neighbors("ACG", 1))
+print(" ".join(Neighbors("CGGTGTAA", 3)))
+# print(ImmediateNeighbors("CAA"))
