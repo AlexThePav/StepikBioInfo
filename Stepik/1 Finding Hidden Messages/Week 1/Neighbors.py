@@ -32,7 +32,7 @@ def Neighbors(Pattern, d):
   # print(Pattern, Suffix(Pattern))
   # print("suffixNeighbors", suffixNeighbors)
   for text in suffixNeighbors:
-    if HammingDistance(Suffix(Pattern), text) < d:
+    if HammingDistance(Suffix(Pattern), text) == d:
       for x in nucleotides:
         # print(Pattern, text)
         textWithNucleotide = text
