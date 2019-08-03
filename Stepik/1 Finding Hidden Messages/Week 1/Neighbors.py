@@ -32,8 +32,7 @@ def Neighbors(Pattern, d):
   for text in suffixNeighbors:
     if HammingDistance(Suffix(Pattern), text) == d:
       for x in nucleotides:
-        textWithNucleotide = text
-        x += textWithNucleotide
+        x += text
         neighborhood.append(x)
     else:
       textWithNucleotide = FirstSymbol(Pattern) + text

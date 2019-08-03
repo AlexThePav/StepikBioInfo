@@ -1,4 +1,4 @@
-from Replication import remove_duplicates
+from Replication import remove_duplicates, HammingDistance
 from itertools import product
 
 def SymbolToNumber(symbol):
@@ -60,7 +60,62 @@ def FasterFrequentWords(Text, k):
       pattern = NumberToPattern(i, k)
       frequentPatterns.append(pattern)
   return frequentPatterns
+
+def FirstSymbol(Pattern):
+  return Pattern[0]
+
+def Suffix(Pattern):
+  return Pattern[1::]
+
+def Neighbors(Pattern, d):
+  nucleotides = list("ACGT")
+  if d == 0:
+    return [Pattern]
+  if len(Pattern) == 1:
+    return nucleotides
+  neighborhood = []
+  suffixNeighbors = Neighbors(Suffix(Pattern), d)
+  for text in suffixNeighbors:
+    if HammingDistance(Suffix(Pattern), text) == d:
+      for x in nucleotides:
+        x += text
+        neighborhood.append(x)
+    else:
+      textWithNucleotide = FirstSymbol(Pattern) + text
+      neighborhood.append(textWithNucleotide)
+  return neighborhood
+
+def ComputeFrequenciesWithMismatches(Text, k, d):
+  frequencyArray = [0] * (4**k)
+  for i in range(0,len(Text)-k+1):
+    pattern = Text[i:k+i]
+    j = PatternToNumber(pattern)
+    neighborhood = Neighbors(pattern, d)
+    for approximatePattern in neighborhood:
+      j = PatternToNumber(approximatePattern)
+      frequencyArray[j] += 1
+  return frequencyArray
+
+def FrequentWordsWithMismatches(Text, k, d):
+  frequentPatterns = []
+  frequencyArray = ComputeFrequenciesWithMismatches(Text, k, d)
+  maxCount = max(frequencyArray)
+  print(maxCount)
+  pattern = ""
+  maxes = 0
+  for i in range(0, 4**k-1):
+    if frequencyArray[i] == maxCount:
+      pattern = NumberToPattern(i, k)
+      maxes += 1
+      frequentPatterns.append(pattern)
+  print(maxes)
+  return frequentPatterns
+
+
 if __name__ == "__main__":
-  print(" ".join(FasterFrequentWords("ATTTAATTCTAAT", 3)))
-# print(PatternToNumber("TTTGAAAACTCCGTA"))
-# print(NumberToPattern(5437,8))
+  # print(" ".join(FasterFrequentWords("ATTTAATTCTAAT", 3)))
+  # print(PatternToNumber("TTTGAAAACTCCGTA"))
+  # print(NumberToPattern(5437,8))
+  print(ComputeFrequenciesWithMismatches("ACGTTGCATGTCGCATGATGCATGAGAGCT", 4, 1))
+  # print(ComputeFrequencies("ACCACCGAGGAGGTGTGATGATATTGGTA", 3))
+  print(FrequentWordsWithMismatches("ACGTTGCATGTCGCATGATGCATGAGAGCT", 4, 1))
