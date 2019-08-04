@@ -40,14 +40,10 @@ def NumberToPattern(index, k):
 
 def ComputeFrequencies(Text, k):
   frequencyArray = [0] * (4**k)
-  frequenciesJoined = ""
   for i in range(0,len(Text)-k+1):
     pattern = Text[i:k+i]
     j = PatternToNumber(pattern)
     frequencyArray[j] += 1
-  for frequency in frequencyArray:
-    frequenciesJoined = frequenciesJoined + str(frequency)
-  # return "".join(frequenciesJoined)
   return frequencyArray
 
 def FasterFrequentWords(Text, k):
@@ -76,7 +72,7 @@ def Neighbors(Pattern, d):
   neighborhood = []
   suffixNeighbors = Neighbors(Suffix(Pattern), d)
   for text in suffixNeighbors:
-    if HammingDistance(Suffix(Pattern), text) == d:
+    if HammingDistance(Suffix(Pattern), text) < d:
       for x in nucleotides:
         x += text
         neighborhood.append(x)
@@ -87,28 +83,26 @@ def Neighbors(Pattern, d):
 
 def ComputeFrequenciesWithMismatches(Text, k, d):
   frequencyArray = [0] * (4**k)
+  allPatterns = []
   for i in range(0,len(Text)-k+1):
     pattern = Text[i:k+i]
-    j = PatternToNumber(pattern)
     neighborhood = Neighbors(pattern, d)
     for approximatePattern in neighborhood:
       j = PatternToNumber(approximatePattern)
       frequencyArray[j] += 1
+      jToPattern = NumberToPattern(j, k)
+      allPatterns.append(jToPattern)
   return frequencyArray
 
 def FrequentWordsWithMismatches(Text, k, d):
   frequentPatterns = []
   frequencyArray = ComputeFrequenciesWithMismatches(Text, k, d)
   maxCount = max(frequencyArray)
-  print(maxCount)
   pattern = ""
-  maxes = 0
   for i in range(0, 4**k-1):
     if frequencyArray[i] == maxCount:
       pattern = NumberToPattern(i, k)
-      maxes += 1
       frequentPatterns.append(pattern)
-  print(maxes)
   return frequentPatterns
 
 
@@ -116,6 +110,6 @@ if __name__ == "__main__":
   # print(" ".join(FasterFrequentWords("ATTTAATTCTAAT", 3)))
   # print(PatternToNumber("TTTGAAAACTCCGTA"))
   # print(NumberToPattern(5437,8))
-  print(ComputeFrequenciesWithMismatches("ACGTTGCATGTCGCATGATGCATGAGAGCT", 4, 1))
+  # print(ComputeFrequenciesWithMismatches("ACGTTGCATGTCGCATGATGCATGAGAGCT", 4, 1))
   # print(ComputeFrequencies("ACCACCGAGGAGGTGTGATGATATTGGTA", 3))
-  print(FrequentWordsWithMismatches("ACGTTGCATGTCGCATGATGCATGAGAGCT", 4, 1))
+  print((" ".join(FrequentWordsWithMismatches("GCGGATTATTGATTGATTATTGGCGGATTGGTCGCGGGCGGATTGCGGATTGATTGAGAGGTCGTCAGAGGTCATTGCGGATTAGAGAGAGAGAGGCGGGCGGATTGATTAGAGGCGGAGAGATTGAGAGATTATTGATTGGTCAGAGATTATTATTGCGGGTCATTGATTGCGGATTATTGATTGATTGCGGATTGCGGGCGGATTGATTATTATTAGAGATTGTCATTGGTCATTATTGCGGGTCATTGATTGTCAGAGATTGGTCAGAGATTGGTCGCGGATTGAGAGATTATTAGAGGCGGATTATTGATTGGTCGTCGCGGATTGATTGGTCGTCATTGATTGCGGGCGGAGAGATTAGAG", 6, 2))))
