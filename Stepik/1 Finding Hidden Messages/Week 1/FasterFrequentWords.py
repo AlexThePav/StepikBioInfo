@@ -1,4 +1,5 @@
 from Replication import remove_duplicates, HammingDistance
+from ReverseComplement import ReverseComplement
 from itertools import product
 
 def SymbolToNumber(symbol):
@@ -105,6 +106,22 @@ def FrequentWordsWithMismatches(Text, k, d):
       frequentPatterns.append(pattern)
   return frequentPatterns
 
+def FrequentWordsWMismRevComplements(Text, k, d):
+  frequentPatterns = []
+  TextRC = ReverseComplement(Text)
+  frequencyArray = [0] * (4 ** k)
+  frequencyArraySP = ComputeFrequenciesWithMismatches(Text, k, d)
+  frequencyArrayRC = ComputeFrequenciesWithMismatches(TextRC, k, d)
+  for i in range(0, 4**k-1):
+    frequencyArray[i] = frequencyArrayRC[i] + frequencyArraySP[i]
+  maxCount = max(frequencyArray)
+  pattern = ""
+  for i in range(0, 4**k-1):
+    if frequencyArray[i] == maxCount:
+      pattern = NumberToPattern(i, k)
+      frequentPatterns.append(pattern)
+  return frequentPatterns
+
 
 if __name__ == "__main__":
   # print(" ".join(FasterFrequentWords("ATTTAATTCTAAT", 3)))
@@ -112,4 +129,6 @@ if __name__ == "__main__":
   # print(NumberToPattern(5437,8))
   # print(ComputeFrequenciesWithMismatches("ACGTTGCATGTCGCATGATGCATGAGAGCT", 4, 1))
   # print(ComputeFrequencies("ACCACCGAGGAGGTGTGATGATATTGGTA", 3))
-  print((" ".join(FrequentWordsWithMismatches("GCGGATTATTGATTGATTATTGGCGGATTGGTCGCGGGCGGATTGCGGATTGATTGAGAGGTCGTCAGAGGTCATTGCGGATTAGAGAGAGAGAGGCGGGCGGATTGATTAGAGGCGGAGAGATTGAGAGATTATTGATTGGTCAGAGATTATTATTGCGGGTCATTGATTGCGGATTATTGATTGATTGCGGATTGCGGGCGGATTGATTATTATTAGAGATTGTCATTGGTCATTATTGCGGGTCATTGATTGTCAGAGATTGGTCAGAGATTGGTCGCGGATTGAGAGATTATTAGAGGCGGATTATTGATTGGTCGTCGCGGATTGATTGGTCGTCATTGATTGCGGGCGGAGAGATTAGAG", 6, 2))))
+  # print((" ".join(FrequentWordsWithMismatches("GCGGATTATTGATTGATTATTGGCGGATTGGTCGCGGGCGGATTGCGGATTGATTGAGAGGTCGTCAGAGGTCATTGCGGATTAGAGAGAGAGAGGCGGGCGGATTGATTAGAGGCGGAGAGATTGAGAGATTATTGATTGGTCAGAGATTATTATTGCGGGTCATTGATTGCGGATTATTGATTGATTGCGGATTGCGGGCGGATTGATTATTATTAGAGATTGTCATTGGTCATTATTGCGGGTCATTGATTGTCAGAGATTGGTCAGAGATTGGTCGCGGATTGAGAGATTATTAGAGGCGGATTATTGATTGGTCGTCGCGGATTGATTGGTCGTCATTGATTGCGGGCGGAGAGATTAGAG", 6, 2))))
+
+  print(" ".join(FrequentWordsWMismRevComplements("CAAGCCTAGCACAGAGAGCACAGAGGAGCAAATGAGCCTAATAGCAAATAATCCTAATCCTAATAATAGAATCCTGAGCACAAATAGAGCCTGAGCCTCAAGAGCCTAATAGAATGAGGAGGAGAGCAAATCCTGAGAATCCTCAGAGAATCCTAGAGAATGAGCCTAATGAGAATCCTGAGGAGAGAGAATAGAATCAAGAATGAGCAAGAATAGCACAAGGAGAGAATCAAG", 7, 3)))
