@@ -107,14 +107,9 @@ def FrequentWordsWithMismatches(Text, k, d):
   count = ApproximateCountDict(Text, k, d)
   print(count)
   m = max(count.values())
-  print("*" * 10)
-  print(m)
-  print("*" * 10)
   for key in count.keys():
     if count[key] == m:
       print(key)
-  print("*" * 10)
-
   for i in count:
     if count[i] == m:
       frequentWords.append(Text[i:i+k])
