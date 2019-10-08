@@ -15,7 +15,7 @@ def Count(Motifs):
 	for i in range(t):
 	    for j in range(k):
 	        symbol = Motifs[i][j]
-	        print("symbol = " + symbol)
+	        # print("symbol = " + symbol)
 	        count[symbol][j] += 1
 
 	return count
