@@ -1,7 +1,7 @@
 # Insert your Pr(Text, Profile) function here from Motifs.py.
 # Input:  String Text and profile matrix Profile
 # Output: Pr(Text, Profile)
-def Pr(Text, Profile):
+def ProfileProduct(Text, Profile):
     p = 1
     t = len(Text)
     for i in range(t):
@@ -18,7 +18,7 @@ def ProfileMostProbablePattern(Text, k, Profile):
 
 	for i in range(t-(k-1)):
 		candidate = Text[i:i+k]
-		candidatePr = Pr(candidate,Profile)
+		candidatePr = ProfileProduct(candidate,Profile)
 
 		if candidatePr > maxCandidatePr:
 			maxCandidatePr = candidatePr
