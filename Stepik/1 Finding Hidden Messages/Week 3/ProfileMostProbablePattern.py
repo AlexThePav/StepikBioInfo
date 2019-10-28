@@ -26,23 +26,19 @@ def ProfileMostProbablePattern(Text, k, Profile):
 
 	return finalKmer
 
-# fo = open("dataset_Profile.txt", "r+")
-#
-# fo.close()
-
 with open("dataset_Profile.txt") as file_input:
 	content = file_input.readlines()
 content = [x.strip() for x in content]
 Dna = content[0]
-k = content[1]
-ACGTs = {'A': [], 'C': [], 'G': [], 'T': []}
-print(ACGTs.values())
-print(ACGTs.keys())
+k = int(content[1])
+profileDict = {'A': [], 'C': [], 'G': [], 'T': []}
 contentCount = 2
-for nucleotide in ACGTs.values():
-	nucleotide.append(list(content[contentCount], " "))
+for nucleotide in profileDict.values():
+	for contentItem in content[contentCount].split(" "):
+		nucleotide.append(float(contentItem))
 	contentCount += 1
-print(ACGTs)
+
+print(ProfileMostProbablePattern(Dna, k, profileDict))
 
 ### DO NOT MODIFY THE CODE BELOW THIS LINE ###
 # print(ProfileMostProbablePattern('TTACCATGGGACCGCTGACTGATTTCTGGCGTCAGCGTGATGCTGGTGTGGATGACATTCCGGTGCGCTTTGTAAGCAGAGTTTA',
