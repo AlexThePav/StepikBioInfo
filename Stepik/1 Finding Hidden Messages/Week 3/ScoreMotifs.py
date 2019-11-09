@@ -58,7 +58,7 @@ def Score(Motifs):
 
     return score
 
-
-### DO NOT MODIFY THE CODE BELOW THIS LINE ###
-print(Score(["AACGTA","CCCGTT","CACCTT","GGATTA","TTCCGG"]))
+if __name__ == "__main__":
+	### DO NOT MODIFY THE CODE BELOW THIS LINE ###
+	print(Score(["AACGTA","CCCGTT","CACCTT","GGATTA","TTCCGG"]))
 

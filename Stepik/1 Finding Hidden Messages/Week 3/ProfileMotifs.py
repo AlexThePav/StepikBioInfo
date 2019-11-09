@@ -38,7 +38,8 @@ def Profile(Motifs):
 
 	return profile
 
-
-### DO NOT MODIFY THE CODE BELOW THIS LINE ###
-motifs = ["AACGTA","CCCGTT","CACCTT","GGATTA","TTCCGG"]
-print(Profile(motifs))
+if __name__ == "__main__":
+			
+	### DO NOT MODIFY THE CODE BELOW THIS LINE ###
+	motifs = ["AACGTA","CCCGTT","CACCTT","GGATTA","TTCCGG"]
+	print(Profile(motifs))
