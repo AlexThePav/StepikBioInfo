@@ -3,12 +3,12 @@ from decimal import Decimal
 # Input:  A list of kmers Dna, and integers k and t (where t is the number of kmers in Dna)
 # Output: GreedyMotifSearch(Dna, k, t)
 def GreedyMotifSearchWithPseudocounts(Dna, k, t):
-    BestMotifs = []
-    for i in range(0, t):
-        BestMotifs.append(Dna[i][0:k])
+	BestMotifs = []
+	for i in range(0, t):
+			BestMotifs.append(Dna[i][0:k])
 
-    n = len(Dna[0])
-    for i in range(0, n-k+1):
+	n = len(Dna[0])
+	for i in range(0, n-k+1):
 		Motifs = []
 		Motifs.append(Dna[0][i:i+k])
 
@@ -19,7 +19,7 @@ def GreedyMotifSearchWithPseudocounts(Dna, k, t):
 		if Score(Motifs) < Score(BestMotifs):
 			BestMotifs = Motifs
 
-    return BestMotifs
+return BestMotifs
 
 # Copy all needed subroutines here.  These subroutines are the same used by GreedyMotifSearch(),
 # except that you should replace Count(Motifs) and Profile(Motifs) with the new functions

@@ -9,11 +9,11 @@ from ProfileMotifs import Profile
 def GreedyMotifSearch(Dna, k):
 	t = len(Dna)
 	BestMotifs = []
-	for i in range(0, t):
+	for i in range(0,t):
 			BestMotifs.append(Dna[i][0:k])
 
 	n = len(Dna[0])
-	for i in range(0, n-k+1):
+	for i in range(0,n-k):
 		Motifs = []
 		Motifs.append(Dna[0][i:i+k])
 
