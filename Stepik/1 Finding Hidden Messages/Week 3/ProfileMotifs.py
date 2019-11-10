@@ -31,9 +31,6 @@ def Profile(Motifs):
 	for symbol in count.keys():
 		profile[symbol] = []
 		for j in range(k):
-			#x = Decimal(count[symbol][j]) / k
-			#rounded = round(x,1)
-			#roundedF = float(round(x,1))
 			profile[symbol].append(float(round(Decimal(count[symbol][j])/t,1)))
 
 	return profile
