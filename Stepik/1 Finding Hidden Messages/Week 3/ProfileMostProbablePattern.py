@@ -4,7 +4,7 @@
 def Probability(Text, Profile):
     p = 1
     t = len(Text)
-    for i in range(t):
+    for i in range(0,t):
         p = p * Profile[Text[i]][i]
 
     return p
