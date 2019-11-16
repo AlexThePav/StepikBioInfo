@@ -16,7 +16,7 @@ def ProfileMostProbablePattern(Text, k, Profile):
 	maxCandidatePr = 0
 	finalKmer = Text[0:k]
 
-	for i in range(t-(k-1)):
+	for i in range(0,t-k):
 		candidate = Text[i:i+k]
 		candidatePr = Probability(candidate,Profile)
 
