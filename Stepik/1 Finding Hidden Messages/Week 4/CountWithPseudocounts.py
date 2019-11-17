@@ -14,17 +14,18 @@ def CountWithPseudocounts(Motifs):
 
 	#range over all elements symbol = Motifs[i][j] of the count matrix and add 1 to count[symbol][j].
 	for i in range(t):
-	    for j in range(k):
-	        symbol = Motifs[i][j]
-	        count[symbol][j] += 1
+    for j in range(k):
+      symbol = Motifs[i][j]
+      count[symbol][j] += 1
 
 	return count
 
 
-
-### DO NOT MODIFY THE CODE BELOW THIS LINE ###
-print(CountWithPseudocounts(["AACGTA",
- "CCCGTT",
-  "CACCTT",
-   "GGATTA",
-    "TTCCGG"]))
+if __name__ == '__main__':
+		
+	### DO NOT MODIFY THE CODE BELOW THIS LINE ###
+	print(CountWithPseudocounts(["AACGTA",
+	 "CCCGTT",
+	  "CACCTT",
+	   "GGATTA",
+	    "TTCCGG"]))
